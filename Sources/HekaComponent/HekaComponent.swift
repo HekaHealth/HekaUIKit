@@ -110,6 +110,7 @@ private extension HekaComponent {
     )
 
     subtitleLabel.font = UIFont.systemFont(ofSize: 12)
+    subtitleLabel.text = "Subtitle"
     subtitleLabel.textColor = .lightText
     subtitleLabel.numberOfLines = 1
     subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
