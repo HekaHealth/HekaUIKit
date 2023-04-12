@@ -132,7 +132,8 @@ private extension HekaComponent {
         equalTo: trailingAnchor, constant: -Constant.padding
       ),
       button.leadingAnchor.constraint(
-        equalTo: titleStackView.trailingAnchor, constant: Constant.padding
+        greaterThanOrEqualTo: titleStackView.trailingAnchor,
+        constant: Constant.padding
       ),
       button.centerYAnchor.constraint(equalTo: centerYAnchor),
       button.widthAnchor.constraint(equalToConstant: Constant.buttonWidth),
