@@ -98,6 +98,7 @@ private extension HekaComponent {
   func prepareTitleLabel() -> [NSLayoutConstraint] {
     titleLabel.text = "Apple HealthKit"
     titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+    titleLabel.textColor = .darkGray
     addSubview(titleLabel)
     return [
       titleLabel.leadingAnchor.constraint(
@@ -114,7 +115,7 @@ private extension HekaComponent {
   
   func prepareSubTitleLabel() -> [NSLayoutConstraint] {
     subtitleLabel.font = UIFont.systemFont(ofSize: 12)
-    subtitleLabel.textColor = .gray
+    subtitleLabel.textColor = .lightText
     addSubview(subtitleLabel)
     return [
       subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
