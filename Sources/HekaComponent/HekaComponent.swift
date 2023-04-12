@@ -11,7 +11,7 @@ public final class HekaComponent: UIView {
   
   struct Constant {
     static let padding: CGFloat = 8
-    static let containerHeight: CGFloat = 200
+    static let containerHeight: CGFloat = 80
     static let imageSize: CGFloat = 25
     static let buttonWidth: CGFloat = 100
     static let buttonHeight: CGFloat = 100
@@ -64,7 +64,7 @@ public final class HekaComponent: UIView {
   //MARK: - Configurations
 private extension HekaComponent {
   func prepareView() {
-    backgroundColor = .secondarySystemBackground
+    backgroundColor = .systemBackground
     layer.cornerRadius = 8
     layer.shadowRadius = 8
     layer.shadowOpacity = 1
