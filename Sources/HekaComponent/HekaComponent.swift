@@ -128,12 +128,12 @@ private extension HekaComponent {
     button.setTitleColor(.darkText, for: .normal)
     addSubview(button)
     return [
-      button.trailingAnchor.constraint(
-        equalTo: trailingAnchor, constant: -Constant.padding
-      ),
       button.leadingAnchor.constraint(
         greaterThanOrEqualTo: titleStackView.trailingAnchor,
         constant: Constant.padding
+      ),
+      button.trailingAnchor.constraint(
+        equalTo: trailingAnchor, constant: -Constant.padding
       ),
       button.centerYAnchor.constraint(equalTo: centerYAnchor),
       button.widthAnchor.constraint(equalToConstant: Constant.buttonWidth),
@@ -147,8 +147,8 @@ private extension HekaComponent {
       heightAnchor.constraint(equalToConstant: Constant.containerHeight)
     ]
     allConstraings.append(contentsOf: prepareAppleImageView())
-    allConstraings.append(contentsOf: prepareTitleStack())
-    allConstraings.append(contentsOf: prepareActionButton())
+//    allConstraings.append(contentsOf: prepareTitleStack())
+//    allConstraings.append(contentsOf: prepareActionButton())
     NSLayoutConstraint.activate(allConstraings)
   }
 }
