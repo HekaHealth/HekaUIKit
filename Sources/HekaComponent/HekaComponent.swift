@@ -81,9 +81,7 @@ private extension HekaComponent {
       named: "appleHealthKit", in: HekaResources.resourceBundle, compatibleWith: nil
     )
     imageView.contentMode = .scaleAspectFit
-    imageView.backgroundColor = .red
     imageView.layer.masksToBounds = true
-    imageView.layer.cornerRadius = 25 / 2
     addSubview(imageView)
     return [
       imageView.leadingAnchor.constraint(
@@ -99,6 +97,7 @@ private extension HekaComponent {
     titleLabel.text = "Apple HealthKit"
     titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
     titleLabel.textColor = .darkGray
+    titleLabel.numberOfLines = 1
     addSubview(titleLabel)
     return [
       titleLabel.leadingAnchor.constraint(
@@ -106,9 +105,6 @@ private extension HekaComponent {
       ),
       titleLabel.topAnchor.constraint(
         equalTo: topAnchor, constant: Constant.padding
-      ),
-      titleLabel.trailingAnchor.constraint(
-        equalTo: button.leadingAnchor, constant: -Constant.padding
       )
     ]
   }
@@ -116,6 +112,7 @@ private extension HekaComponent {
   func prepareSubTitleLabel() -> [NSLayoutConstraint] {
     subtitleLabel.font = UIFont.systemFont(ofSize: 12)
     subtitleLabel.textColor = .lightText
+    subtitleLabel.numberOfLines = 1
     addSubview(subtitleLabel)
     return [
       subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -137,6 +134,9 @@ private extension HekaComponent {
     return [
       button.trailingAnchor.constraint(
         equalTo: trailingAnchor, constant: -Constant.padding
+      ),
+      button.leadingAnchor.constraint(
+        equalTo: titleLabel.trailingAnchor, constant: Constant.padding
       ),
       button.centerYAnchor.constraint(equalTo: centerYAnchor),
       button.widthAnchor.constraint(equalToConstant: Constant.buttonWidth),
