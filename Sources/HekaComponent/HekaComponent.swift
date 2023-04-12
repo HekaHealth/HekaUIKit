@@ -14,7 +14,7 @@ public final class HekaComponent: UIView {
     static let containerHeight: CGFloat = 80
     static let imageSize: CGFloat = 25
     static let buttonWidth: CGFloat = 100
-    static let buttonHeight: CGFloat = 100
+    static let buttonHeight: CGFloat = 40
   }
   
   private let imageView = UIImageView()
@@ -69,7 +69,7 @@ private extension HekaComponent {
     layer.shadowRadius = 8
     layer.shadowOpacity = 1
     layer.shadowOffset = .zero
-    layer.shadowColor = UIColor.black.cgColor
+    layer.shadowColor = UIColor.lightGray.cgColor
     layer.masksToBounds = false
     clipsToBounds = false
     isUserInteractionEnabled = true
