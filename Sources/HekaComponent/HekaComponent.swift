@@ -9,8 +9,13 @@ import UIKit
 
 public final class HekaComponent: UIView {
   
-  let padding: CGFloat = 8
-  
+  struct Constant {
+    static let padding: CGFloat = 8
+    static let containerHeight: CGFloat = 200
+    static let imageSize: CGFloat = 25
+    static let buttonWidth: CGFloat = 100
+    static let buttonHeight: CGFloat = 100
+  }
   
   private let imageView = UIImageView()
   private let titleLabel = UILabel()
@@ -31,7 +36,6 @@ public final class HekaComponent: UIView {
   }
   
     // MARK: - Lifecycle
-  
   public override func layoutSubviews() {
     super.layoutSubviews()
     layer.shadowPath = UIBezierPath(
@@ -44,7 +48,6 @@ public final class HekaComponent: UIView {
   }
   
     // MARK: - Actions
-  
   @objc private func buttonTapped() {
     switch viewModel.currentConnectionState {
       case .notConnected:
@@ -73,7 +76,6 @@ private extension HekaComponent {
     translatesAutoresizingMaskIntoConstraints = false
   }
   
-  
   func prepareAppleImageView() -> [NSLayoutConstraint] {
     imageView.image = UIImage(
       named: "appleHealthKit", in: HekaResources.resourceBundle, compatibleWith: nil
@@ -84,10 +86,12 @@ private extension HekaComponent {
     imageView.layer.cornerRadius = 25 / 2
     addSubview(imageView)
     return [
-      imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+      imageView.leadingAnchor.constraint(
+        equalTo: leadingAnchor, constant: Constant.padding
+      ),
       imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      imageView.widthAnchor.constraint(equalToConstant: 25),
-      imageView.heightAnchor.constraint(equalToConstant: 25)
+      imageView.widthAnchor.constraint(equalToConstant: Constant.imageSize),
+      imageView.heightAnchor.constraint(equalToConstant: Constant.imageSize)
     ]
   }
   
@@ -96,9 +100,15 @@ private extension HekaComponent {
     titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
     addSubview(titleLabel)
     return [
-      titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: padding),
-      titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-      titleLabel.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: -padding),
+      titleLabel.leadingAnchor.constraint(
+        equalTo: imageView.trailingAnchor, constant: Constant.padding
+      ),
+      titleLabel.topAnchor.constraint(
+        equalTo: topAnchor, constant: Constant.padding
+      ),
+      titleLabel.trailingAnchor.constraint(
+        equalTo: button.leadingAnchor, constant: -Constant.padding
+      )
     ]
   }
   
@@ -108,7 +118,9 @@ private extension HekaComponent {
     addSubview(subtitleLabel)
     return [
       subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-      subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
+      subtitleLabel.topAnchor.constraint(
+        equalTo: titleLabel.bottomAnchor, constant: Constant.padding
+      ),
       subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
     ]
   }
@@ -116,21 +128,26 @@ private extension HekaComponent {
   func prepareActionButton() -> [NSLayoutConstraint] {
     button.setTitle(viewModel.buttonTitle, for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-    button.layer.cornerRadius = 20
+    button.layer.cornerRadius = Constant.buttonHeight/2
     button.backgroundColor = .secondarySystemBackground
     button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    button.setTitleColor(.darkText, for: .normal)
     addSubview(button)
     return [
-      button.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+      button.trailingAnchor.constraint(
+        equalTo: trailingAnchor, constant: -Constant.padding
+      ),
       button.centerYAnchor.constraint(equalTo: centerYAnchor),
-      button.widthAnchor.constraint(equalToConstant: 100),
-      button.heightAnchor.constraint(equalToConstant: 40)
+      button.widthAnchor.constraint(equalToConstant: Constant.buttonWidth),
+      button.heightAnchor.constraint(equalToConstant: Constant.buttonHeight)
     ]
   }
   
   func setupSubviews() {
     prepareView()
-    var allConstraings = [NSLayoutConstraint]()
+    var allConstraings = [
+      heightAnchor.constraint(equalToConstant: Constant.containerHeight)
+    ]
     allConstraings.append(contentsOf: prepareAppleImageView())
     allConstraings.append(contentsOf: prepareTitleLabel())
     allConstraings.append(contentsOf: prepareSubTitleLabel())
