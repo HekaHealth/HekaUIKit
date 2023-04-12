@@ -78,8 +78,8 @@ private extension HekaComponent {
     imageView.image = UIImage(
       named: "appleHealthKit", in: HekaResources.resourceBundle, compatibleWith: nil
     )
-    imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.contentMode = .scaleAspectFit
+    imageView.backgroundColor = .red
     imageView.layer.masksToBounds = true
     imageView.layer.cornerRadius = 25 / 2
     addSubview(imageView)
@@ -94,7 +94,6 @@ private extension HekaComponent {
   func prepareTitleLabel() -> [NSLayoutConstraint] {
     titleLabel.text = "Apple HealthKit"
     titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
     addSubview(titleLabel)
     return [
       titleLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: padding),
@@ -106,7 +105,6 @@ private extension HekaComponent {
   func prepareSubTitleLabel() -> [NSLayoutConstraint] {
     subtitleLabel.font = UIFont.systemFont(ofSize: 12)
     subtitleLabel.textColor = .gray
-    subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
     addSubview(subtitleLabel)
     return [
       subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -119,7 +117,7 @@ private extension HekaComponent {
     button.setTitle(viewModel.buttonTitle, for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
     button.layer.cornerRadius = 20
-    button.translatesAutoresizingMaskIntoConstraints = false
+    button.backgroundColor = .secondarySystemBackground
     button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     addSubview(button)
     return [
