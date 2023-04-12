@@ -19,7 +19,7 @@ final class HekaResources {
       Bundle(for: HekaResources.self).resourceURL,
     ]
     
-    let bundleName = "heka_heka"
+    let bundleName = "HekaComponent_HekaComponent"
     
     for candidate in candidates {
       let bundlePath = candidate?.appendingPathComponent(bundleName + ".bundle")
