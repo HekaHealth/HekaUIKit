@@ -34,7 +34,9 @@ public final class HekaComponent: UIView {
   
   public override func layoutSubviews() {
     super.layoutSubviews()
-    layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
+    layer.shadowPath = UIBezierPath(
+      roundedRect: bounds, cornerRadius: layer.cornerRadius
+    ).cgPath
   }
   
   public override func didMoveToSuperview() {
