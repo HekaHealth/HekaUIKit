@@ -83,6 +83,7 @@ private extension HekaComponent {
     )
     imageView.contentMode = .scaleAspectFit
     imageView.layer.masksToBounds = true
+    imageView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(imageView)
     return [
       imageView.leadingAnchor.constraint(
@@ -97,15 +98,21 @@ private extension HekaComponent {
   func prepareTitleStack() -> [NSLayoutConstraint] {
     titleStackView.axis = .vertical
     titleStackView.spacing = Constant.padding
-    
+    titleStackView.translatesAutoresizingMaskIntoConstraints = false
+
     titleLabel.text = "Apple HealthKit"
     titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
     titleLabel.textColor = .darkGray
     titleLabel.numberOfLines = 1
-    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.setContentHuggingPriority(
+      UILayoutPriority.defaultHigh + 1, for: NSLayoutConstraint.Axis.horizontal
+    )
+
     subtitleLabel.font = UIFont.systemFont(ofSize: 12)
     subtitleLabel.textColor = .lightText
     subtitleLabel.numberOfLines = 1
+    subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
 
     titleStackView.addArrangedSubview(titleLabel)
     titleStackView.addArrangedSubview(subtitleLabel)
@@ -126,6 +133,7 @@ private extension HekaComponent {
     button.backgroundColor = .secondarySystemBackground
     button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     button.setTitleColor(.darkText, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
     addSubview(button)
     return [
       button.leadingAnchor.constraint(
@@ -147,8 +155,8 @@ private extension HekaComponent {
       heightAnchor.constraint(equalToConstant: Constant.containerHeight)
     ]
     allConstraings.append(contentsOf: prepareAppleImageView())
-//    allConstraings.append(contentsOf: prepareTitleStack())
-//    allConstraings.append(contentsOf: prepareActionButton())
+    allConstraings.append(contentsOf: prepareTitleStack())
+    allConstraings.append(contentsOf: prepareActionButton())
     NSLayoutConstraint.activate(allConstraings)
   }
 }
