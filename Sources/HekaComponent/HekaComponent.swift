@@ -21,7 +21,8 @@ public final class HekaComponent: UIView {
   private let titleLabel = UILabel()
   private let subtitleLabel = UILabel()
   private let button = UIButton(type: .system)
-  
+  private var titleStackView = UIStackView(frame: .zero)
+
   var viewModel: ComponentViewModel
   
   public init(uuid: String, apiKey: String) {
@@ -93,33 +94,28 @@ private extension HekaComponent {
     ]
   }
   
-  func prepareTitleLabel() -> [NSLayoutConstraint] {
+  func prepareTitleStack() -> [NSLayoutConstraint] {
+    titleStackView.axis = .vertical
+    titleStackView.spacing = Constant.padding
+    
     titleLabel.text = "Apple HealthKit"
     titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
     titleLabel.textColor = .darkGray
     titleLabel.numberOfLines = 1
-    addSubview(titleLabel)
-    return [
-      titleLabel.leadingAnchor.constraint(
-        equalTo: imageView.trailingAnchor, constant: Constant.padding
-      ),
-      titleLabel.topAnchor.constraint(
-        equalTo: topAnchor, constant: Constant.padding
-      )
-    ]
-  }
-  
-  func prepareSubTitleLabel() -> [NSLayoutConstraint] {
+    
     subtitleLabel.font = UIFont.systemFont(ofSize: 12)
     subtitleLabel.textColor = .lightText
     subtitleLabel.numberOfLines = 1
-    addSubview(subtitleLabel)
+
+    titleStackView.addArrangedSubview(titleLabel)
+    titleStackView.addArrangedSubview(subtitleLabel)
+
+    addSubview(titleStackView)
     return [
-      subtitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-      subtitleLabel.topAnchor.constraint(
-        equalTo: titleLabel.bottomAnchor, constant: Constant.padding
+      titleStackView.leadingAnchor.constraint(
+        equalTo: imageView.trailingAnchor, constant: Constant.padding
       ),
-      subtitleLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
+      titleStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
     ]
   }
   
@@ -136,7 +132,7 @@ private extension HekaComponent {
         equalTo: trailingAnchor, constant: -Constant.padding
       ),
       button.leadingAnchor.constraint(
-        equalTo: titleLabel.trailingAnchor, constant: Constant.padding
+        equalTo: titleStackView.trailingAnchor, constant: Constant.padding
       ),
       button.centerYAnchor.constraint(equalTo: centerYAnchor),
       button.widthAnchor.constraint(equalToConstant: Constant.buttonWidth),
@@ -150,8 +146,7 @@ private extension HekaComponent {
       heightAnchor.constraint(equalToConstant: Constant.containerHeight)
     ]
     allConstraings.append(contentsOf: prepareAppleImageView())
-    allConstraings.append(contentsOf: prepareTitleLabel())
-    allConstraings.append(contentsOf: prepareSubTitleLabel())
+    allConstraings.append(contentsOf: prepareTitleStack())
     allConstraings.append(contentsOf: prepareActionButton())
     NSLayoutConstraint.activate(allConstraings)
   }
